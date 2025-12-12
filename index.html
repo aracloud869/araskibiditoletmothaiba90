@@ -7,207 +7,144 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
 <style>
-/* =========================== RESET + BASE =========================== */
+/* ===========================
+   RESET + BASE
+   =========================== */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;outline:none}
 html,body{height:100%;margin:0;padding:0}
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:#f2f4f8;color:#111827;height:100vh;overflow:hidden;
-    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#f2f4f8;color:#111827;height:100vh;overflow:hidden;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
 }
 
-/* =========================== APP LAYOUT =========================== */
+/* APP LAYOUT */
 #app{width:100%;height:100%;display:flex;flex-direction:column;position:relative;background:#f2f4f8;max-width:900px;margin:0 auto;}
 #content{flex:1;overflow-y:auto;padding:18px;padding-bottom:130px;scrollbar-width:none}
 #content::-webkit-scrollbar{display:none}
 
-/* ======================== HEADER ======================== */
+/* HEADER */
 .header-area{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-top:10px}
 .header-title{font-size:1.6rem;font-weight:800;color:#0f1724;margin:0}
 .btn-add-device{background:#2563eb;color:#fff;border:none;padding:8px 16px;border-radius:20px;font-weight:700;display:inline-flex;gap:8px;align-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(37,99,235,0.14)}
 
-/* ======================== TAB + ANIMATION ======================== */
+/* TAB + TRANSITIONS */
 .tab-content{display:none;animation:fadeSlide .32s ease-out}
 .tab-content.active{display:block}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* ======================== CARDS ======================== */
+/* CARD */
 .card{background:#fff;border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:0 6px 20px rgba(14,30,37,0.04);border:1px solid rgba(15,23,42,0.04)}
 .info-card{padding:14px;border-radius:12px;background:#fff;box-shadow:0 4px 12px rgba(2,6,23,0.03);margin-bottom:12px}
 
-/* ======================== DEVICE CARD ======================== */
-.device-card{
-    background:#fff;border-radius:14px;padding:12px;margin-bottom:12px;
-    box-shadow:0 4px 10px rgba(2,6,23,0.03);border:1px solid rgba(0,0,0,0.04);
-    display:flex;flex-direction:column;gap:10px;transition:transform .15s ease,box-shadow .15s;
-}
+/* DEVICE CARD */
+.device-card{background:#fff;border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(2,6,23,0.03);border:1px solid rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:10px;transition:transform .15s ease,box-shadow .15s}
 .device-card:active{transform:scale(.985)}
-
 .dev-top{display:flex;gap:12px;align-items:center}
-.dev-icon{
-    width:54px;height:54px;border-radius:12px;
-    background:linear-gradient(135deg,#eef2ff,#dbeafe);
-    display:flex;align-items:center;justify-content:center;
-    color:#2563eb;font-size:1.4rem;flex-shrink:0;
-}
+.dev-icon{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#eef2ff,#dbeafe);display:flex;align-items:center;justify-content:center;color:#2563eb;font-size:1.4rem;flex-shrink:0}
+.dev-info{flex:1}
 .dev-name{font-size:1rem;font-weight:800;margin:0;color:#0f1724}
 .dev-status{font-size:.85rem;color:#6b7280;display:flex;align-items:center;gap:8px}
 
+/* LED gradient */
+.led-text{font-weight:800;background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981,#3b82f6,#a78bfa);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glide 3s linear infinite}
+@keyframes glide{to{background-position:200% center}}
+
+/* DEVICE ACTIONS */
 .dev-actions{display:flex;gap:8px;border-top:1px solid #f3f4f6;padding-top:10px}
 .btn-act{flex:1;border:none;border-radius:10px;padding:9px 0;font-weight:700;cursor:pointer}
 .btn-enter{background:#16a34a;color:#fff}
 .btn-del{background:#fee2e2;color:#dc2626}
 
-/* ======================== BOTTOM NAV ======================== */
-#bottom-nav{
-    position:fixed;bottom:0;left:50%;transform:translateX(-50%);
-    max-width:900px;width:100%;height:76px;background:#fff;
-    display:flex;align-items:center;justify-content:space-around;
-    border-top:1px solid #e6edf3;z-index:120;padding-bottom:10px;
-}
+/* BOTTOM NAV */
+#bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:900px;width:100%;height:76px;background:#fff;display:flex;align-items:center;justify-content:space-around;border-top:1px solid #e6edf3;z-index:120;padding-bottom:10px}
 .nav-item{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;color:#9aa4b2;font-size:.78rem;cursor:pointer;padding:6px 12px}
 .nav-item i{font-size:1.25rem;transition:transform .12s}
 .nav-item.active{color:#2563eb}
 .nav-item.active i{transform:translateY(-3px)}
 
-/* ======================== GAME LIST ======================== */
+/* GAME HORIZONTAL */
 .game-list-horizontal{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px}
-.game-card{
-    flex:0 0 128px;background:#fff;border-radius:12px;overflow:hidden;
-    box-shadow:0 8px 22px rgba(2,6,23,0.04);cursor:pointer;
-    transition:transform .15s,box-shadow .15s;
-}
-.game-card:hover{
-    transform:translateY(-6px);box-shadow:0 14px 36px rgba(2,6,23,0.08);
-}
+.game-card{flex:0 0 128px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(2,6,23,0.04);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.game-card:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(2,6,23,0.08)}
 .game-card-img{height:88px;background:#eef;display:flex;align-items:center;justify-content:center}
 .game-card img{width:100%;height:100%;object-fit:cover}
 
-/* ======================== MODAL GAME LIST ======================== */
-.game-item{
-    display:flex;align-items:center;justify-content:space-between;padding:10px 0;
-    border-bottom:1px solid #f3f4f6;
-}
-.btn-play{
-    background:#10b981;color:white;border:none;padding:8px 12px;
-    border-radius:10px;font-weight:700;cursor:pointer;
-}
+/* GAME LIST MODAL */
+.game-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f3f4f6}
+.game-item-info{display:flex;align-items:center;gap:10px}
+.game-item-info strong{display:block;font-size:1rem;color:#0f1724}
+.btn-play{background:#10b981;color:#fff;padding:8px 12px;border-radius:8px;border:none;font-weight:700;cursor:pointer}
 
-/* ======================== CLOUD VIEW ======================== */
-#cloud-view{
-    position:fixed;inset:0;background:#000;display:none;
-    z-index:1000;flex-direction:column;align-items:stretch;
-}
+/* SEARCH INPUTS */
+.search-input{width:100%;padding:10px;border-radius:12px;border:1px solid #e6edf3;font-size:.95rem;margin-bottom:12px}
+
+/* CLOUD VIEW & CONTROLS */
+#cloud-view{position:fixed;inset:0;background:#000;display:none;z-index:1000;align-items:stretch;flex-direction:column}
 #cloud-iframe{flex:1;border:none;width:100%;height:100%}
+.cloud-toolbar{position:absolute;top:12px;right:12px;display:flex;gap:8px;z-index:1001}
+.cloud-btn{background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);padding:8px;border-radius:10px;cursor:pointer;font-weight:700;backdrop-filter:blur(4px)}
+.cloud-status{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.6);color:#fff;padding:6px 10px;border-radius:999px;font-weight:700}
 
-.cloud-toolbar{
-    position:absolute;top:12px;right:12px;
-    display:flex;gap:8px;z-index:1001;
-}
-.cloud-btn{
-    background:rgba(255,255,255,0.06);color:#fff;
-    border:1px solid rgba(255,255,255,0.12);padding:8px;border-radius:10px;
-    cursor:pointer;font-weight:700;backdrop-filter:blur(4px);
-}
-.cloud-status{
-    position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.6);
-    color:white;padding:6px 10px;border-radius:999px;font-weight:700;
-}
+/* FPS monitor */
+.fps-monitor{position:fixed;right:14px;bottom:92px;background:rgba(17,24,39,0.9);color:#fff;padding:8px 10px;border-radius:10px;font-weight:800;z-index:130;font-size:.85rem;display:none}
 
-/* ======================== ASSIST MENU ======================== */
-.assist-menu{
-    position:absolute;top:50%;right:80px;transform:translateY(-50%);
-    background:rgba(20,20,20,0.93);padding:10px;border-radius:12px;
-    display:none;flex-direction:column;gap:8px;width:200px;z-index:1002;
-}
-.menu-row{
-    color:white;padding:10px;border-radius:8px;
-    display:flex;align-items:center;gap:8px;cursor:pointer;
-}
+/* CONTROLS MENU */
+.assist-menu{position:absolute;top:50%;right:80px;transform:translateY(-50%);background:rgba(20,20,20,0.93);padding:10px;border-radius:12px;display:none;flex-direction:column;gap:8px;width:200px;z-index:1002}
+.menu-row{color:#fff;padding:10px;border-radius:8px;display:flex;align-items:center;gap:8px;cursor:pointer}
 
-/* FPS */
-.fps-monitor{
-    position:fixed;right:14px;bottom:92px;background:rgba(17,24,39,0.9);
-    color:#fff;padding:8px 10px;border-radius:10px;font-weight:800;z-index:130;
-    display:none;font-size:.85rem;
+/* ANIMATIONS */
+@keyframes pulseGlow{0%{box-shadow:0 0 0 rgba(99,102,241,0.18)}50%{box-shadow:0 12px 30px rgba(99,102,241,0.08)}100%{box-shadow:0 0 0 rgba(99,102,241,0)}}
+
+/* DARK MODE */
+.dark-mode{background:#061025;color:#dbeafe}
+.dark-mode .card,.dark-mode .info-card,.dark-mode .device-card,.dark-mode .game-card{
+  background:#071226;color:#dbeafe;border:1px solid rgba(255,255,255,0.04);box-shadow:none;
+}
+.dark-mode .dev-icon{background:linear-gradient(135deg,#0f1724,#0b1224);color:#60a5fa}
+.dark-mode .nav-item{color:#94a3b8}
+.dark-mode .nav-item.active{color:#60a5fa}
+.dark-mode .search-input{background:#041025;border:1px solid #072036;color:#cfe8ff}
+
+/* RESPONSIVE */
+@media (max-width:520px){
+  .game-card{flex:0 0 110px}
+  #bottom-nav{height:84px}
 }
 
 .text-muted{color:#6b7280;font-size:.9rem}
 </style>
 </head>
+
 <body>
-<!-- SPLASH WITH CENTER LOADING -->
-<div id="splash-screen">
-    <img id="splash-img" src="https://64.media.tumblr.com/af73de34592f80ae8a996a710f519611/c833e1d32b970df6-cf/s540x810/51ed877d4ec9dbf58786989211821908005e5986.gif">
-    <div id="splash-loading">
-        <div class="splash-spinner"></div>
-        <p id="splash-percent">0%</p>
-    </div>
-</div>
-
-<style>
-#splash-screen{
-    position:fixed;
-    inset:0;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:999999;
-    overflow:hidden;
-    transition:opacity .6s ease;
-}
-#splash-img{
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover; /* căn vừa điện thoại */
-    object-position:center;
-    z-index:1;
-}
-#splash-loading{
-    position:relative;
-    z-index:2;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-}
-
-.splash-spinner{
-    width:55px;
-    height:55px;
-    border:5px solid rgba(255,255,255,0.3);
-    border-top-color:#fff;
-    border-radius:50%;
-    animation:spin 0.8s linear infinite;
-}
-
-#splash-percent{
-    color:white;
-    font-size:1.2rem;
-    font-weight:800;
-    text-shadow:0 0 5px rgba(0,0,0,0.6);
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-</style>
 
 <div id="app">
     <div id="content">
 
-        <!-- ===================== HOME ===================== -->
+        <!-- ===========================
+             TAB HOME
+        ============================ -->
         <div id="tab-home" class="tab-content active">
             <div class="header-area">
                 <h2 class="header-title">Trang Chủ</h2>
             </div>
 
-            <div style="background:linear-gradient(135deg,#2563eb,#1d4ed8);padding:22px;border-radius:18px;color:white;margin-bottom:18px;box-shadow:0 10px 30px rgba(37,99,235,0.16);">
+            <div style="
+                background: linear-gradient(135deg,#2563eb,#1d4ed8);
+                padding:22px;border-radius:18px;color:white;
+                margin-bottom:18px;box-shadow:0 10px 30px rgba(37,99,235,0.16);
+            ">
                 <h3 style="margin:0 0 6px 0;font-size:1.4rem;">Cloud Phone PRO MAX</h3>
-                <p style="margin:0;font-size:.95rem;opacity:.92;">Treo game 24/7 • No lag • FPS cao • Không nóng máy</p>
+                <p style="margin:0;font-size:.95rem;opacity:.92;">
+                    Treo game 24/7 • No lag • FPS cao • Không nóng máy
+                </p>
 
-                <button onclick="switchTab('devices', document.querySelector('.nav-item:nth-child(2)'))"
-                    style="margin-top:14px;padding:10px 22px;background:white;color:#2563eb;font-weight:800;border-radius:22px;border:none;cursor:pointer;">
+                <button 
+                    onclick="switchTab('devices', document.querySelector('.nav-item:nth-child(2)'))"
+                    style="
+                        margin-top:14px;padding:10px 22px;background:white;
+                        color:#2563eb;font-weight:800;border-radius:22px;border:none;cursor:pointer;
+                    ">
                     Tới thiết bị
                 </button>
             </div>
@@ -225,11 +162,15 @@ body{
             </div>
         </div>
 
-        <!-- ===================== DEVICES ===================== -->
+        <!-- ===========================
+             TAB DEVICES
+        ============================ -->
         <div id="tab-devices" class="tab-content">
             <div class="header-area">
                 <h2 class="header-title">Thiết Bị</h2>
-                <button class="btn-add-device" onclick="openModal('modal-buy')"><i class="fas fa-plus"></i> Mua Device</button>
+                <button class="btn-add-device" onclick="openModal('modal-buy')">
+                    <i class="fas fa-plus"></i> Mua Device
+                </button>
             </div>
 
             <div id="device-list">
@@ -240,7 +181,9 @@ body{
             </div>
         </div>
 
-        <!-- ===================== EXPLORE ===================== -->
+        <!-- ===========================
+             TAB EXPLORE
+        ============================ -->
         <div id="tab-explore" class="tab-content">
             <div class="header-area">
                 <h2 class="header-title">Khám Phá</h2>
@@ -255,11 +198,17 @@ body{
                     <h3><i class="fas fa-layer-group" style="color:#2563eb;margin-right:6px;"></i> Tất cả Game Cloud</h3>
                     <p class="text-muted" style="margin-top:6px;">Danh sách đầy đủ + tìm kiếm nâng cao.</p>
                 </div>
-                <button class="btn-add-device btn-view-games" onclick="loadAndShowGames()"><i class="fas fa-th"></i> Xem</button>
+
+                <button class="btn-add-device btn-view-games" onclick="loadAndShowGames()">
+                    <i class="fas fa-th"></i> Xem
+                </button>
             </div>
 
             <div class="info-card" onclick="openDiscordLink()" style="cursor:pointer;">
-                <h3><i class="fab fa-discord" style="color:#5865F2;margin-right:6px;"></i> Tham gia Discord</h3>
+                <h3>
+                    <i class="fab fa-discord" style="color:#5865F2;margin-right:6px;"></i>
+                    Tham gia Discord
+                </h3>
                 <p class="text-muted">Nhóm cộng đồng hỗ trợ nhanh nhất.</p>
             </div>
 
@@ -269,8 +218,11 @@ body{
             </div>
         </div>
 
-        <!-- ===================== SETTINGS ===================== -->
+        <!-- ===========================
+             TAB SETTINGS
+        ============================ -->
         <div id="tab-settings" class="tab-content">
+
             <div class="header-area">
                 <h2 class="header-title">Cài Đặt</h2>
             </div>
@@ -307,7 +259,9 @@ body{
 
     </div>
 
-    <!-- ===================== BOTTOM NAV ===================== -->
+    <!-- ===========================
+         BOTTOM NAV
+    ============================ -->
     <nav id="bottom-nav">
         <button class="nav-item active" onclick="switchTab('home', this)">
             <i class="fas fa-home"></i>
@@ -331,70 +285,147 @@ body{
     </nav>
 </div>
 
-<!-- ===================== MODAL BUY ===================== -->
-<div id="modal-buy" class="modal" style="position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:3000;">
-    <div class="modal-box" style="width:90%;max-width:380px;background:white;padding:20px;border-radius:16px;text-align:center;animation:fadeSlide .25s ease;">
+<!-- ===========================
+     MODAL: BUY DEVICE
+=========================== -->
+<div id="modal-buy" class="modal" style="
+    position:fixed;inset:0;background:rgba(0,0,0,.55);
+    display:none;align-items:center;justify-content:center;z-index:3000;
+">
+    <div class="modal-box" style="
+        width:90%;max-width:380px;background:white;padding:20px;
+        border-radius:16px;text-align:center;animation:fadeSlide .25s ease;
+    ">
         <h2 style="margin-top:0;">Mua Cloud Device</h2>
         <p style="color:#6b7280;">Bạn có chắc muốn tạo một thiết bị mới?</p>
 
-        <button onclick="processBuy()" style="background:#2563eb;color:white;border:none;padding:10px 18px;border-radius:10px;font-weight:800;width:100%;">Tạo ngay</button>
+        <button onclick="processBuy()" style="
+            background:#2563eb;color:white;border:none;
+            padding:10px 18px;border-radius:10px;font-weight:800;width:100%;
+        ">Tạo ngay</button>
 
-        <button onclick="closeModal('modal-buy')" style="margin-top:10px;background:#e5e7eb;border:none;color:#374151;padding:10px;border-radius:10px;font-weight:700;width:100%;">Hủy</button>
+        <button onclick="closeModal('modal-buy')" style="
+            margin-top:10px;background:#e5e7eb;border:none;color:#374151;
+            padding:10px;border-radius:10px;font-weight:700;width:100%;
+        ">Hủy</button>
     </div>
 </div>
 
-<!-- ===================== MODAL LOADING ===================== -->
-<div id="modal-loading" class="modal" style="position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:3500;">
+
+<!-- ===========================
+     MODAL: LOADING
+=========================== -->
+<div id="modal-loading" class="modal" style="
+    position:fixed;inset:0;background:rgba(0,0,0,.55);
+    display:none;align-items:center;justify-content:center;z-index:3500;
+">
+
     <div style="text-align:center;color:white;animation:fadeSlide .25s ease;">
-        <div style="width:60px;height:60px;border-radius:50%;border:6px solid rgba(255,255,255,0.3);border-top-color:#fff;animation:spin 0.9s linear infinite;margin:0 auto 12px auto;"></div>
+        <div style="
+            width:60px;height:60px;border-radius:50%;
+            border:6px solid rgba(255,255,255,0.3);
+            border-top-color:#fff;animation:spin 0.9s linear infinite;
+            margin:0 auto 12px auto;
+        "></div>
         <p style="font-size:1.2rem;font-weight:700;">Đang tạo thiết bị...</p>
     </div>
 </div>
 
-<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+<style>
+@keyframes spin { to { transform: rotate(360deg);} }
+</style>
 
-<!-- ===================== MODAL GAME LIST ===================== -->
-<div id="modal-game-list" class="modal" style="position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;flex-direction:column;z-index:3500;">
-    <div style="background:white;padding:14px;border-radius:0 0 18px 18px;">
-        <h2 style="margin:0 0 6px 0;">Tất cả Game</h2>
-        <input id="search-modal-game" oninput="filterGamesModal()" class="search-input" placeholder="Tìm trong danh sách game...">
-    </div>
-    <div id="game-list-content" style="flex:1;background:white;overflow-y:auto;padding:12px;"></div>
-
-    <button onclick="closeModal('modal-game-list')" style="background:#ef4444;color:white;border:none;padding:14px;font-weight:800;font-size:1.1rem;">Đóng</button>
-</div>
-
-<!-- ===================== CLOUD VIEW ===================== -->
-<div id="cloud-view">
-    <div class="cloud-status" id="cloud-status-text">Đang tải...</div>
-
-    <iframe id="cloud-iframe" src="about:blank"></iframe>
-
-    <div class="cloud-toolbar">
-        <button class="cloud-btn" onclick="exitCloud()"><i class="fas fa-times"></i></button>
-        <button class="cloud-btn" onclick="reloadCloud()"><i class="fas fa-sync"></i></button>
-        <button class="cloud-btn" onclick="toggleFullScreen()"><i class="fas fa-expand"></i></button>
-        <button class="cloud-btn" onclick="toggleAssistMenu()"><i class="fas fa-sliders-h"></i></button>
-    </div>
-
-    <div id="assist-menu" class="assist-menu">
-        <div class="menu-row" onclick="restartCloud()"><i class="fas fa-redo"></i> Khởi động lại máy</div>
-        <div class="menu-row" onclick="fakeIP()"><i class="fas fa-globe"></i> Fake IP ẩn danh</div>
-        <div class="menu-row" onclick="cleanRAM()"><i class="fas fa-broom"></i> Dọn RAM 3X</div>
-        <div class="menu-row" onclick="toggleFPS()"><i class="fas fa-tachometer-alt"></i> Bật/Tắt FPS</div>
-    </div>
-</div>
-
-<div id="fps-monitor" class="fps-monitor">FPS: <span id="fps-val">60</span></div>
 
 <!-- ===========================
-     PART 2/2 — SCRIPTS & FINAL
+     MODAL: GAME LIST
+=========================== -->
+<div id="modal-game-list" class="modal" style="
+    position:fixed;inset:0;background:rgba(0,0,0,.55);
+    display:none;flex-direction:column;z-index:3500;
+">
+
+    <div style="background:white;padding:14px;border-radius:0 0 18px 18px;">
+        <h2 style="margin:0 0 6px 0;">Tất cả Game</h2>
+        <input id="search-modal-game" 
+               oninput="filterGamesModal()" 
+               class="search-input" 
+               placeholder="Tìm trong danh sách game...">
+    </div>
+
+    <div id="game-list-content" style="
+        flex:1;background:white;overflow-y:auto;padding:12px;
+    "></div>
+
+    <button onclick="closeModal('modal-game-list')" style="
+        background:#ef4444;color:white;border:none;padding:14px;
+        font-weight:800;font-size:1.1rem;
+    ">Đóng</button>
+</div>
+
+
+<!-- ===========================
+     CLOUD VIEW PRO MAX
+=========================== -->
+<div id="cloud-view">
+    <!-- STATUS -->
+    <div class="cloud-status" id="cloud-status-text">Đang tải...</div>
+
+    <!-- IFRAME -->
+    <iframe id="cloud-iframe" src="about:blank"></iframe>
+
+    <!-- TOOLBAR -->
+    <div class="cloud-toolbar">
+        <!-- Exit -->
+        <button class="cloud-btn" onclick="exitCloud()">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Reload -->
+        <button class="cloud-btn" onclick="reloadCloud()">
+            <i class="fas fa-sync"></i>
+        </button>
+
+        <!-- Fullscreen -->
+        <button class="cloud-btn" onclick="toggleFullScreen()">
+            <i class="fas fa-expand"></i>
+        </button>
+
+        <!-- Assist -->
+        <button class="cloud-btn" onclick="toggleAssistMenu()">
+            <i class="fas fa-sliders-h"></i>
+        </button>
+    </div>
+
+    <!-- ASSIST MENU -->
+    <div id="assist-menu" class="assist-menu">
+        <div class="menu-row" onclick="restartCloud()">
+            <i class="fas fa-redo"></i> Khởi động lại máy
+        </div>
+
+        <div class="menu-row" onclick="fakeIP()">
+            <i class="fas fa-globe"></i> Fake IP ẩn danh
+        </div>
+
+        <div class="menu-row" onclick="cleanRAM()">
+            <i class="fas fa-broom"></i> Dọn RAM 3X
+        </div>
+
+        <div class="menu-row" onclick="toggleFPS()">
+            <i class="fas fa-tachometer-alt"></i> Bật/Tắt FPS
+        </div>
+    </div>
+</div>
+
+<!-- FPS MONITOR -->
+<div id="fps-monitor" class="fps-monitor">FPS: <span id="fps-val">60</span></span></div>
+
+<!-- ===========================
+     PART 4 PRO MAX: GAME ENGINE, SEARCH, DEVICE MANAGER, CLOUD CONTROLS
 =========================== -->
 <script>
-/* ===========================
-   CONFIG & DATA
-   =========================== */
-// Keep only the 6 games you provided (preserve URLs)
+/* -----------------------------
+   GAME DATA (KEEP ONLY YOUR GAMES)
+----------------------------- */
 const GAME_DATA = [
     { name: "The Walking Dead", desc: "Cốt truyện | Zombie", url: "https://testdrive4.now.gg/apps/galaxy-play-technology-limited/10512_t1/the-walking-dead-survivors.html", icon: "https://cdn.now.gg/apps-content/10512/icon/the-walking-dead-survivors.png", tag:"Story" },
     { name: "Battle Bears Heroes", desc: "Battle Royale | Multiplayer & PVP", url: "https://testdrive4.now.gg/apps/battlecoin-games/8270_t1/battle-bears-heroes.html", icon: "https://cdn.now.gg/apps-content/8270/icon/battle-bears-heroes.png", tag:"Action" },
@@ -404,42 +435,39 @@ const GAME_DATA = [
     { name: "Assault Lily", desc: "Cốt truyện | JRPG", url: "https://testdrive-int1.now.gg/apps/pokelabo-inc/5139/assault-lily-last-bullet.html", icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmV0fC9422HGRWikZ2lJP08L8sfPTPpbdTVz7ii2unBQ&s=10", tag:"JRPG" }
 ];
 
-const CLOUD_DEFAULT_URL = "https://turbolite.vercel.app/server/url?data=aHR0cHM6Ly91cHJveHkub25saW5lL3VsdHJhdmlvbGV0L2h2dHJzOCUyRi1ubXclMkNnZSUyRmNwcnMtY251cXRnciUyRmlsYy05MzU1JTJGYWx3c3ZlcC5qdG9s&fs=0";
-
-/* ===========================
+/* -----------------------------
    STATE & DOM REFS
-   =========================== */
+----------------------------- */
 let devices = JSON.parse(localStorage.getItem('cloud_devices') || '[]');
-let fpsAnimationId = null;
-let lastTime = performance.now();
-
+const CLOUD_DEFAULT_URL = "https://turbolite.vercel.app/server/url?data=aHR0cHM6Ly91cHJveHkub25saW5lL3VsdHJhdmlvbGV0L2h2dHJzOCUyRi1ubXclMkNnZSUyRmNwcnMtY251cXRnciUyRmlsYy05MzU1JTJGYWx3c3ZlcC5qdG9s&fs=0";
 const iframe = document.getElementById('cloud-iframe');
 const cloudView = document.getElementById('cloud-view');
 const cloudStatusText = document.getElementById('cloud-status-text');
+const fpsDom = document.getElementById('fps-monitor');
+const fpsValDom = document.getElementById('fps-val');
 
-/* ===========================
-   UTILITIES
-   =========================== */
-function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-
-function showToast(msg, ms=1500){
+/* -----------------------------
+   UTIL
+----------------------------- */
+function escapeHtml(str){ return String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function showToast(text, ms=1600){
     let el = document.getElementById('pro-toast');
     if(!el){
         el = document.createElement('div'); el.id='pro-toast';
         el.style.position='fixed'; el.style.left='50%'; el.style.bottom='140px';
         el.style.transform='translateX(-50%)'; el.style.background='rgba(15,23,42,0.92)';
         el.style.color='#fff'; el.style.padding='10px 14px'; el.style.borderRadius='10px';
-        el.style.zIndex='4000'; el.style.fontWeight='700';
+        el.style.zIndex='3000'; el.style.fontWeight='700';
         document.body.appendChild(el);
     }
-    el.innerText = msg;
+    el.innerText = text;
     el.style.opacity = '1';
     setTimeout(()=> el.style.opacity='0', ms);
 }
 
-/* ===========================
+/* -----------------------------
    DEVICE MANAGEMENT
-   =========================== */
+----------------------------- */
 function saveDevices(){ localStorage.setItem('cloud_devices', JSON.stringify(devices)); }
 
 function renderDevices(){
@@ -452,7 +480,7 @@ function renderDevices(){
         </div>`;
         return;
     }
-    devices.forEach(d=>{
+    devices.forEach(d => {
         const div = document.createElement('div');
         div.className = 'device-card';
         div.innerHTML = `
@@ -472,10 +500,10 @@ function renderDevices(){
     });
 }
 
-function addDevice(props = {}){
+function addDevice(props={}){
     const id = Date.now();
-    const dev = Object.assign({ id, name: `Cluster VIP #${devices.length+1}`, ram:'8GB', android:'Android 12', url:CLOUD_DEFAULT_URL }, props);
-    devices.push(dev);
+    const device = Object.assign({ id, name:`Cluster VIP #${devices.length+1}`, ram:'8GB', android:'Android 12', url:CLOUD_DEFAULT_URL }, props);
+    devices.push(device);
     saveDevices();
     renderDevices();
     showToast('Đã thêm thiết bị');
@@ -483,34 +511,37 @@ function addDevice(props = {}){
 
 function removeDeviceById(id){
     if(!confirm('Bạn có chắc muốn xoá thiết bị này?')) return;
-    devices = devices.filter(d => d.id !== id);
+    devices = devices.filter(d=>d.id!==id);
     saveDevices();
     renderDevices();
     showToast('Đã xóa thiết bị');
 }
 
-/* ===========================
+/* -----------------------------
    GAME RENDER / SEARCH / MODAL
-   =========================== */
+----------------------------- */
 function renderGameHorizontal(list){
     const box = document.getElementById('game-horizontal');
     if(!box) return;
     box.innerHTML = '';
-    (list || GAME_DATA).forEach(g=>{
+    (list||GAME_DATA).forEach(g=>{
         const card = document.createElement('div');
         card.className = 'game-card';
-        card.innerHTML = `<div class="game-card-img"><img src="${escapeHtml(g.icon)}" alt="${escapeHtml(g.name)}"></div><div class="game-card-name">${escapeHtml(g.name)}</div>`;
-        card.onclick = () => openGame(g);
+        card.innerHTML = `
+            <div class="game-card-img"><img src="${escapeHtml(g.icon)}" alt="${escapeHtml(g.name)}"></div>
+            <div class="game-card-name">${escapeHtml(g.name)}</div>
+        `;
+        card.onclick = ()=> openGame(g);
         box.appendChild(card);
     });
 }
 
-function displayGameList(filter = ''){
+function displayGameList(filter=''){
     const container = document.getElementById('game-list-content');
     if(!container) return;
     container.innerHTML = '';
     const q = (filter||'').toLowerCase().trim();
-    const filtered = GAME_DATA.filter(g=>{
+    const filtered = GAME_DATA.filter(g => {
         if(!q) return true;
         return g.name.toLowerCase().includes(q) || g.desc.toLowerCase().includes(q) || (g.tag && g.tag.toLowerCase().includes(q));
     });
@@ -523,7 +554,7 @@ function displayGameList(filter = ''){
         row.className = 'game-item';
         row.innerHTML = `
             <div style="display:flex;align-items:center;gap:10px;">
-                <div style="width:44px;height:44px;border-radius:8px;overflow:hidden;"><img src="${escapeHtml(g.icon)}" style="width:100%;height:100%;object-fit:cover"></div>
+                <div style="width:44px;height:44px;border-radius:8px;overflow:hidden;"><img src="${escapeHtml(g.icon)}" style="width:100%;height:100%;object-fit:cover;"></div>
                 <div class="game-item-info">
                     <strong>${escapeHtml(g.name)}</strong>
                     <span class="text-muted">${escapeHtml(g.desc)} • ${escapeHtml(g.tag||'')}</span>
@@ -536,6 +567,7 @@ function displayGameList(filter = ''){
 }
 
 function loadAndShowGames(){
+    // ensure modal content loads correctly
     displayGameList('');
     openModal('modal-game-list');
 }
@@ -544,7 +576,6 @@ function filterGames(){
     const q = document.getElementById('search-game').value.trim().toLowerCase();
     if(!q){
         renderGameHorizontal(GAME_DATA);
-        displayGameList('');
         return;
     }
     const filtered = GAME_DATA.filter(g => g.name.toLowerCase().includes(q) || g.desc.toLowerCase().includes(q) || (g.tag && g.tag.toLowerCase().includes(q)));
@@ -557,39 +588,43 @@ function filterGamesModal(){
     displayGameList(q);
 }
 
-/* ===========================
-   OPEN GAME (FIXED: use iframe to avoid resetting assist menu)
-   =========================== */
+/* Open game: respect now.gg/testdrive external links (open in new tab),
+   otherwise open in cloud iframe (enterCloud).
+*/
 function openGame(gameOrUrl){
     let url = typeof gameOrUrl === 'string' ? gameOrUrl : (gameOrUrl.url || '');
     if(!url) return;
-    // Open all games inside cloud iframe (so assist menu doesn't disappear)
+    // If it's clearly external cloud/testdrive host, open new tab to avoid iframe issues
+    const externalHosts = ['now.gg','testdrive4.now.gg','testdrive-int1.now.gg','testdrive'];
+    if (externalHosts.some(h => url.includes(h)) || /^https?:\/\//i.test(url)) {
+        // open in new tab
+        window.open(url, '_blank');
+        showToast('Mở game trong tab mới');
+        return;
+    }
+    // else use iframe/cloud view
     enterCloud(url);
-    showToast('Đang mở game trong Cloud');
 }
 
-/* ===========================
+/* -----------------------------
    CLOUD CONTROLS
-   =========================== */
-function enterCloud(url = CLOUD_DEFAULT_URL){
+----------------------------- */
+function enterCloud(url=CLOUD_DEFAULT_URL){
     cloudView.style.display = 'flex';
     iframe.src = url;
     cloudStatusText.innerText = 'Đang kết nối...';
-    // hide assist menu (will be toggled by user)
-    const menu = document.getElementById('assist-menu');
-    if(menu) menu.style.display = 'none';
+    document.getElementById('assist-menu').style.display = 'none';
 }
 
 function exitCloud(){
-    iframe.src = 'about:blank';
     cloudView.style.display = 'none';
+    iframe.src = 'about:blank';
     cloudStatusText.innerText = '';
-    const menu = document.getElementById('assist-menu');
-    if(menu) menu.style.display = 'none';
+    document.getElementById('assist-menu').style.display = 'none';
 }
 
 function reloadCloud(){
-    if(!iframe.src || iframe.src === 'about:blank') return;
+    if(!iframe.src || iframe.src==='about:blank') return;
     cloudStatusText.innerText = 'Đang reload...';
     const cur = iframe.src;
     iframe.src = 'about:blank';
@@ -599,7 +634,7 @@ function reloadCloud(){
 function restartCloud(){
     cloudStatusText.innerText = 'Khởi động lại...';
     reloadCloud();
-    setTimeout(()=>{ cloudStatusText.innerText = 'Đã khởi động lại'; }, 800);
+    setTimeout(()=>{ cloudStatusText.innerText = 'Đã khởi động lại'; }, 900);
 }
 
 function fakeIP(){
@@ -609,35 +644,50 @@ function fakeIP(){
 }
 
 function cleanRAM(){
-    showToast('Đang dọn RAM... (giả lập)');
-    setTimeout(()=> showToast('Dọn RAM hoàn tất'), 1100);
+    showToast('Dọn RAM... (giả lập)');
+    setTimeout(()=> showToast('Dọn RAM hoàn tất'), 1000);
 }
 
-/* ===========================
-   FPS Monitor (works while cloud-view open)
-   =========================== */
+/* FPS Monitor */
+let fpsId=null, lastTime = performance.now();
 function toggleFPS(){
     const el = document.getElementById('fps-monitor');
     if(!el) return;
     if(el.style.display === 'block'){
         el.style.display = 'none';
-        if(fpsAnimationId) cancelAnimationFrame(fpsAnimationId);
-        fpsAnimationId = null;
+        if(fpsId) cancelAnimationFrame(fpsId);
+        fpsId = null;
         showToast('Tắt FPS');
         return;
     }
     el.style.display = 'block';
-    lastTime = performance.now();
     function loop(now){
         const delta = now - lastTime;
         const fps = Math.round(1000 / (delta || 16));
         lastTime = now;
+        const v = Math.min(999, fps);
         const valEl = document.getElementById('fps-val');
-        if(valEl) valEl.innerText = Math.min(999, fps);
-        fpsAnimationId = requestAnimationFrame(loop);
+        if(valEl) valEl.innerText = v;
+        fpsId = requestAnimationFrame(loop);
     }
-    fpsAnimationId = requestAnimationFrame(loop);
+    fpsId = requestAnimationFrame(loop);
     showToast('Bật FPS');
+}
+
+function toggleFullScreen() {
+    const el = document.getElementById("cloud-view");
+
+    if (!document.fullscreenElement) {
+        // Vào fullscreen
+        if (el.requestFullscreen) el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen(); 
+        else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    } else {
+        // Thoát fullscreen
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        else if (document.msExitFullscreen) document.msExitFullscreen();
+    }
 }
 
 /* Assist menu toggle */
@@ -647,159 +697,116 @@ function toggleAssistMenu(){
     m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
 }
 
-/* ===========================
-   FULLSCREEN FIX (robust cross-browser)
-   =========================== */
-function toggleFullScreen(){
-    const el = document.getElementById('cloud-view') || document.documentElement;
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (el.requestFullscreen) el.requestFullscreen().catch(()=>{});
-        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-        else if (el.msRequestFullscreen) el.msRequestFullscreen();
-    } else {
-        if (document.exitFullscreen) document.exitFullscreen().catch(()=>{});
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
-    }
+/* -----------------------------
+   PERSIST / INIT
+----------------------------- */
+function ensureSavedGames(){
+    // store original list so your URLs are preserved if user exports
+    localStorage.setItem('cloud_games', JSON.stringify(GAME_DATA));
 }
-
-/* Update toolbar icon on fullscreen change (optional visual feedback) */
-document.addEventListener("fullscreenchange", () => {
-    const btn = document.querySelector(".cloud-toolbar .cloud-btn i.fa-expand, .cloud-toolbar .cloud-btn i.fa-compress");
-    if (!btn) return;
-    if (document.fullscreenElement) {
-        btn.classList.remove('fa-expand'); btn.classList.add('fa-compress');
-    } else {
-        btn.classList.add('fa-expand'); btn.classList.remove('fa-compress');
-    }
-});
-
-/* ===========================
-   MODAL HELPERS
-   =========================== */
-function openModal(id){
-    const el = document.getElementById(id);
-    if(!el) return;
-    el.style.display = 'flex';
-}
-function closeModal(id){
-    const el = document.getElementById(id);
-    if(!el) return;
-    el.style.display = 'none';
-}
-
-/* ===========================
-   BACKUP / RESTORE
-   =========================== */
-function backupConfig(){
-    const data = { devices, games: GAME_DATA, dark: localStorage.getItem('dark-mode-enabled') || 'no' };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'cloud_phone_backup.json';
-    a.click();
-}
-
-function importConfig(file){
-    const reader = new FileReader();
-    reader.onload = (e)=>{
-        try {
-            const json = JSON.parse(e.target.result);
-            if(json.devices) devices = json.devices;
-            if(json.dark === 'yes') document.body.classList.add('dark-mode');
-            localStorage.setItem('cloud_devices', JSON.stringify(devices));
-            localStorage.setItem('dark-mode-enabled', json.dark || 'no');
-            renderDevices();
-            showToast('Khôi phục hoàn tất');
-        } catch(err){
-            alert('File không hợp lệ');
-        }
-    };
-    reader.readAsText(file);
-}
-
-/* ===========================
-   DARK MODE
-   =========================== */
-function toggleDarkMode(){
-    const bd = document.body;
-    if(bd.classList.contains('dark-mode')){
-        bd.classList.remove('dark-mode'); localStorage.setItem('dark-mode-enabled','no'); showToast('Tắt chế độ tối');
-    } else {
-        bd.classList.add('dark-mode'); localStorage.setItem('dark-mode-enabled','yes'); showToast('Bật chế độ tối');
-    }
-}
-
-/* ===========================
-   SWITCH TAB
-   =========================== */
-function switchTab(name, btn){
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    const tab = document.getElementById('tab-' + name);
-    if(tab) tab.classList.add('active');
-    document.querySelectorAll('#bottom-nav .nav-item').forEach(b => b.classList.remove('active'));
-    if(btn) btn.classList.add('active');
-    else {
-        const map = { home:0, devices:1, explore:2, settings:3 };
-        const idx = map[name];
-        const navs = document.querySelectorAll('#bottom-nav .nav-item');
-        if(navs[idx]) navs[idx].classList.add('active');
-    }
-}
-
-/* ===========================
-   START / INIT
-   =========================== */
-function ensureSavedGames(){ localStorage.setItem('cloud_games', JSON.stringify(GAME_DATA)); }
 ensureSavedGames();
 
 function initState(){
-    // apply dark mode from localStorage
-    if(localStorage.getItem('dark-mode-enabled') === 'yes') document.body.classList.add('dark-mode');
-    // render devices & games
     renderDevices();
     renderGameHorizontal(GAME_DATA);
     displayGameList('');
+    // load dark mode flag if any
+    if(localStorage.getItem('dark-mode-enabled') === 'yes') document.body.classList.add('dark-mode');
 }
 document.addEventListener('DOMContentLoaded', initState);
 
-/* expose some helpers for console */
+/* expose for console debug */
 window.addDevice = addDevice;
 window.openGame = openGame;
 window.toggleFPS = toggleFPS;
+window.toggleFullScreen = toggleFullScreen;
 window.cleanRAM = cleanRAM;
 window.fakeIP = fakeIP;
 window.restartCloud = restartCloud;
-window.backupConfig = backupConfig;
-window.importConfig = importConfig;
+</script>
 
-// SPLASH IMAGE LOADING
-function startSplash(){
-    let percent = 0;
-    const percentText = document.getElementById("splash-percent");
-    const splash = document.getElementById("splash-screen");
+<!-- ===========================
+     PART 5 PRO MAX — SYSTEM CORE
+=========================== -->
+<script>
+/* -----------------------------
+   TAB SWITCH
+----------------------------- */
+function switchTab(name, btn){
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
 
-    let timer = setInterval(()=>{
-        percent += Math.floor(Math.random()*6)+4;
-        if(percent > 100) percent = 100;
-
-        percentText.innerText = percent + "%";
-
-        if(percent >= 100){
-            clearInterval(timer);
-
-            setTimeout(()=>{
-                splash.style.opacity = "0";
-                setTimeout(()=> splash.style.display = "none", 600);
-            }, 300);
+    document.querySelectorAll('#bottom-nav .nav-item').forEach(b => b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    else {
+        // auto detect (in case loaded from function)
+        const map = { home:0, devices:1, explore:2, settings:3 };
+        const idx = map[name];
+        if(idx !== undefined){
+            const navs = document.querySelectorAll('#bottom-nav .nav-item');
+            if(navs[idx]) navs[idx].classList.add('active');
         }
-    }, 130);
+    }
 }
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    startSplash();
-});
+/* -----------------------------
+   MODAL CONTROL
+----------------------------- */
+function openModal(id){
+    const m = document.getElementById(id);
+    if(m) m.style.display = 'flex';
+}
+function closeModal(id){
+    const m = document.getElementById(id);
+    if(m) m.style.display = 'none';
+}
 
+/* -----------------------------
+   DARK MODE
+----------------------------- */
+function toggleDarkMode(){
+    const bd = document.body;
+    if(bd.classList.contains('dark-mode')){
+        bd.classList.remove('dark-mode');
+        localStorage.setItem('dark-mode-enabled','no');
+        showToast('Tắt chế độ tối');
+    } else {
+        bd.classList.add('dark-mode');
+        localStorage.setItem('dark-mode-enabled','yes');
+        showToast('Bật chế độ tối');
+    }
+}
+
+/* -----------------------------
+   BUY DEVICE PROCESS
+----------------------------- */
+function processBuy(){
+    closeModal('modal-buy');
+    openModal('modal-loading');
+
+    setTimeout(()=>{
+        closeModal('modal-loading');
+        addDevice();
+        switchTab('devices', document.querySelector('#bottom-nav .nav-item:nth-child(2)'));
+    }, 2500);
+}
+
+/* -----------------------------
+   DISCORD
+----------------------------- */
+function openDiscordLink(){
+    window.open("https://discord.gg/", "_blank");
+    showToast("Mở Discord");
+}
+
+/* -----------------------------
+   LOGOUT
+----------------------------- */
+function logout(){
+    if(!confirm("Bạn có chắc muốn đăng xuất?")) return;
+    showToast("Đã đăng xuất");
+    setTimeout(() => location.reload(), 1200);
+}
 </script>
 
 </body>
